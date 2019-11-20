@@ -1,0 +1,15 @@
+/*
+ * @description: 样式主题文件 改变主题变量，具体变量名可查看 taro-ui/dist/style/variables/default.scss 文件
+ * @Author: fusy
+ * @Date: 2019-06-20 14:33:16
+ * -----
+ * @Modified By: fusy
+ * @Last Modified: 2019-06-20 20:19:11
+ * HISTORY:
+ * Date  	By	Comments
+ * ------	---	---------------------------------------------------------
+ */
+
+$color-brand: #6190e8;
+/* 引入 Taro UI 默认样式 */
+@import '~taro-ui/dist/style/index.scss';

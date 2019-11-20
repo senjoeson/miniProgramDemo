@@ -1,0 +1,30 @@
+{
+    "miniprogramRoot": "dist/",
+    "projectname": "停车位管理系统",
+    "description": "小程序",
+    "appid": "wx2caccc57fff9139d",
+    "setting": {
+        "urlCheck": true,
+        "es6": false,
+        "postcss": false,
+        "minified": false,
+        "newFeature": true,
+        "autoAudits": false
+    },
+    "compileType": "miniprogram",
+    "libVersion": "2.9.4",
+    "condition": {
+        "miniprogram": {
+            "current": 2,
+            "list": [
+                {
+                    "id": 0,
+                    "name": "停车步骤",
+                    "pathName": "pages/parkStep/ParkStep",
+                    "query": "objectId=5358fd3bd9&&carNumber=粤A42123",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

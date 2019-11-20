@@ -1,0 +1,59 @@
+{
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+    "editor.formatOnSave": true,
+    "psi-header.lang-config": [
+        {
+            "language": "javascript",
+            "begin": "/**"
+        }
+    ],
+    "psi-header.templates": [
+        {
+            "language": "*",
+            "template": [
+                "@description: ",
+                "@Author: <<author>>",
+                "@Date: <<filecreated('YYYY-MM-DD HH:mm:ss')>>",
+                "-----",
+                "@Modified By: <<author>>",
+                "@Last Modified: <<dateformat('YYYY-MM-DD HH:mm:ss')>>",
+                "HISTORY:",
+                "Date  \tBy\tComments",
+                "------\t---\t---------------------------------------------------------"
+            ],
+            "changeLogCaption": "HISTORY:",
+            "changeLogHeaderLineCount": 2,
+            "changeLogEntryTemplate": [
+                "",
+                "<<dateformat(YY-MM-DD)>>\t<<author>>\t"
+            ]
+        }
+    ],
+    "psi-header.changes-tracking": {
+        "autoHeader": "autoSave",
+        "isActive": true,
+        "modAuthor": "@Modified By: ",
+        "modDate": "@Last Modified: "
+    },
+    "eslint.options": {
+        "configFile": ".eslintrc"
+    },
+    "emmet.triggerExpansionOnTab": true,
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.quoteStyle": "single"
+}
