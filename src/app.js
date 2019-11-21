@@ -25,7 +25,11 @@ class App extends Component {
         pages: [
             "pages/home/Home",
             "pages/parkStep/ParkStep",
-            "pages/stepInOne/StepInOne"
+            "pages/stepInOne/StepInOne",
+            "pages/stepInTwo/StepInTwo",
+            "pages/stepInThree/StepInThree",
+            "pages/stepOutOne/StepOutOne",
+            "pages/stepOutTwo/StepOutTwo"
         ],
         window: {
             backgroundTextStyle: "light",
@@ -37,9 +41,7 @@ class App extends Component {
 
     componentDidMount() {}
 
-    componentDidShow() {
-        //  Bmob.initialize("aabe0d5b693e1ac0caa4b923051c30e6", "ce43f4e54cf02dea3aa22b3966291688");
-    }
+    componentDidShow() {}
 
     componentDidHide() {}
 

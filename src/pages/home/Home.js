@@ -9,7 +9,6 @@ import { connect } from "@tarojs/redux";
 import { AtButton, AtToast } from "taro-ui";
 
 import "./index.scss";
-import { id } from "postcss-selector-parser";
 
 const Bmob = require("../../common/Bmob-2.2.1.min.js");
 
@@ -22,9 +21,6 @@ export default class Home extends Component {
         dispatch: PropTypes.any,
         msg: PropTypes.string
     };
-
-
-     
 
     constructor(props) {
         super(props);
@@ -55,25 +51,18 @@ export default class Home extends Component {
                 stationName: res[0].stationName,
                 enable: res[0].enable
             });
+            Taro.setStorageSync("stationId", res[0].objectId);
             // console.log(JSON.stringify(res));
         });
     };
 
-    openScan = () => {
-        // Taro.scanCode({
-        //     onlyFromCamera: true,
-        //     success (res) {
-        //         console.log(res)
-        //       }
-        // })
-    };
     //开始停车
     startPark = () => {
         //1检查停车场状态 2. 检查=停车场的车位数量
         if (!this.state.enable || this.state.parkNumber == 0) {
             Taro.showModal({
                 title: "提示",
-                content: "当前停车位不可用,无法停车.",
+                content: "当前停车位不可用或数量不足,无法停车",
                 success: res => {
                     if (res.confirm) {
                         console.log("用户点击确定");
@@ -99,13 +88,15 @@ export default class Home extends Component {
         }
     };
 
-   
     //解锁停车
-    unlockPark = () => {};
-
+    unlockPark = () => {
+        Taro.navigateTo({
+            url: "/pages/stepOutOne/StepOutOne"
+        });
+    };
 
     //保存车辆信息
-    saveCarInfo=()=>{
+    saveCarInfo = () => {
         const query = Bmob.Query("Car");
         query.set("carNumber", "粤A 4783");
         query.set("carColor", "白色");
@@ -117,21 +108,27 @@ export default class Home extends Component {
                     icon: "success",
                     duration: 2000
                 });
+                Taro.setStorageSync("cardId", res.objectId);
                 Taro.navigateTo({
-                    url: `/pages/parkStep/ParkStep?objectId=${res.objectId}`
+                    // url: `/pages/parkStep/ParkStep?objectId=${res.objectId}`
+                    url: `/pages/stepInOne/StepInOne`
                 });
             })
             .catch(err => {
                 console.log(err);
             });
-    }
+    };
     render() {
         return (
-            <View className="home-style">
+            <View className='home-style'>
                 <Text>当前停车场: {this.state.stationName}</Text>
                 <Text>当前的停车位: {this.state.parkNumber} 位</Text>
-                <AtButton onClick={this.startPark}>停车流程</AtButton>
-                <AtButton onClick={this.unlockPark}>出车流程</AtButton>
+                <AtButton className='btn-style' onClick={this.startPark}>
+                    停车流程
+                </AtButton>
+                <AtButton className='btn-style' onClick={this.unlockPark}>
+                    出车流程
+                </AtButton>
             </View>
         );
     }

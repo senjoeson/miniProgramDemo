@@ -2,12 +2,13 @@
  * @description: 停车步骤
  **/
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text, Progress, Checkbox } from "@tarojs/components";
+import { View, Text, Progress, Checkbox, Image } from "@tarojs/components";
 import PropTypes from "prop-types";
 import { connect } from "@tarojs/redux";
 import { AtButton, AtCheckbox } from "taro-ui";
 
 import drawQrcode from "../../common/weapp.qrcode.min.js";
+import checkImage from "../../resources/images/check.png";
 
 import "./index.scss";
 
@@ -68,45 +69,37 @@ export default class ParkStep extends Component {
                         <Text style='margin-left: 20rpx'>
                             步骤1: 检查是否有剩余停车位
                         </Text>
-                        <Checkbox
-                            style='margin-left: 20rpx'
-                            checked='true'
-                            color='red'
-                            disabled={this.state.step1State}
-                        />
+
+                        {this.state.step1State && (
+                            <Image src={checkImage} className='img-style' />
+                        )}
                     </View>
 
                     <View className='step-style'>
                         <Text style='margin-left: 20rpx'>
                             步骤2: 打开停车场栏杆是否开启
                         </Text>
-                        <Checkbox
-                            style='margin-left: 20rpx'
-                            checked='true'
-                            disabled={this.state.step2State}
-                        />
+                        {this.state.step2State && (
+                            <Image src={checkImage} className='img-style' />
+                        )}
                     </View>
 
                     <View className='step-style'>
                         <Text style='margin-left: 20rpx'>
                             步骤3: 是否可以停入停车位
                         </Text>
-                        <Checkbox
-                            style='margin-left: 20rpx'
-                            checked='true'
-                            disabled={this.state.step3State}
-                        />
+                        {this.state.step3State && (
+                            <Image src={checkImage} className='img-style' />
+                        )}
                     </View>
 
                     <View className='step-style'>
                         <Text style='margin-left: 20rpx'>
                             步骤4: 停车完成,生成计费二维码
                         </Text>
-                        <Checkbox
-                            style='margin-left: 20rpx'
-                            checked='true'
-                            disabled={this.state.step4State}
-                        />
+                        {this.state.step4State && (
+                            <Image src={checkImage} className='img-style' />
+                        )}
                     </View>
 
                     <View className='qrcode-style'>
@@ -120,11 +113,9 @@ export default class ParkStep extends Component {
                         <Text style='margin-left: 20rpx'>
                             步骤5: 扫描停车桩二维码,开始计费
                         </Text>
-                        <Checkbox
-                            style='margin-left: 20rpx'
-                            checked='true'
-                            disabled={this.state.step5State}
-                        />
+                        {this.state.step5State && (
+                            <Image src={checkImage} className='img-style' />
+                        )}
                     </View>
                 </View>
             </View>

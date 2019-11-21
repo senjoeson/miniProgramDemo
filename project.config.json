@@ -19,9 +19,37 @@
             "list": [
                 {
                     "id": 0,
+                    "name": "首页",
+                    "pathName": "pages/home/Home",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 1,
                     "name": "停车步骤",
                     "pathName": "pages/parkStep/ParkStep",
                     "query": "objectId=5358fd3bd9&&carNumber=粤A42123",
+                    "scene": null
+                },
+                {
+                    "id": 2,
+                    "name": "停车步骤一",
+                    "pathName": "pages/stepInOne/StepInOne",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 3,
+                    "name": "停车步骤二",
+                    "pathName": "pages/stepInTwo/StepInTwo",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 4,
+                    "name": "出车一",
+                    "pathName": "pages/stepOutOne/StepOutOne",
+                    "query": "",
                     "scene": null
                 }
             ]
