@@ -24,12 +24,13 @@ class App extends Component {
     config = {
         pages: [
             "pages/home/Home",
-            "pages/parkStep/ParkStep",
+            // "pages/parkStep/ParkStep",
             "pages/stepInOne/StepInOne",
             "pages/stepInTwo/StepInTwo",
             "pages/stepInThree/StepInThree",
             "pages/stepOutOne/StepOutOne",
-            "pages/stepOutTwo/StepOutTwo"
+            "pages/stepOutTwo/StepOutTwo",
+            "pages/stepOutThree/StepOutThree"
         ],
         window: {
             backgroundTextStyle: "light",

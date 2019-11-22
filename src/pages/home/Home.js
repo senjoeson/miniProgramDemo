@@ -38,16 +38,18 @@ export default class Home extends Component {
     };
 
     componentDidMount = () => {
+        console.log("不执行吗?");
         // this.props.dispatch({
         //     type: "home/effectsDemo",
         //     payload: { msg: "trigger effectsDemo" }
         // });
         const query = Bmob.Query("Stations");
         query.find().then(res => {
+            console.log(JSON.stringify(res));
             //[{"createdAt":"2019-11-20 11:08:29","enable":true,"objectId":"eKdvLLLa",
             //"stationName":"测试停车场","stationNumber":200,"updatedAt":"2019-11-20 11:16:24"}]
             this.setState({
-                parkNumber: res[0].parkNumber,
+                parkNumber: res[0].stationNumber,
                 stationName: res[0].stationName,
                 enable: res[0].enable
             });
@@ -120,13 +122,13 @@ export default class Home extends Component {
     };
     render() {
         return (
-            <View className='home-style'>
+            <View className="home-style">
                 <Text>当前停车场: {this.state.stationName}</Text>
                 <Text>当前的停车位: {this.state.parkNumber} 位</Text>
-                <AtButton className='btn-style' onClick={this.startPark}>
+                <AtButton className="btn-style" onClick={this.startPark}>
                     停车流程
                 </AtButton>
-                <AtButton className='btn-style' onClick={this.unlockPark}>
+                <AtButton className="btn-style" onClick={this.unlockPark}>
                     出车流程
                 </AtButton>
             </View>

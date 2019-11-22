@@ -51,6 +51,20 @@
                     "pathName": "pages/stepOutOne/StepOutOne",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "id": 5,
+                    "name": "出车2",
+                    "pathName": "pages/stepOutTwo/StepOutTwo",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 6,
+                    "name": "出车3",
+                    "pathName": "pages/stepOutThree/StepOutThree",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

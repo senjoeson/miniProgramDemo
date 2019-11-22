@@ -43,59 +43,50 @@ export default class StepInTwo extends Component {
         });
     };
 
+    test = () => {
+        this.setState({
+            canNext: true,
+            checkWord: "扫描成功."
+        });
+        Taro.atMessage({
+            message: "扫码成功",
+            type: "info"
+        });
+        var startDate = new Date().getTime();
+        const query = Bmob.Query("ParkStation");
+        query.set("cardId", Taro.getStorageSync("cardId"));
+        query.set("protectState", true);
+        query.set("payState", false);
+        query.set("startDate", startDate);
+        query
+            .save()
+            .then(res1 => {
+                console.log(
+                    "ParkStation 保存的数据===>" + JSON.stringify(res1)
+                );
+                Taro.setStorageSync("parkStationId", res1.objectId);
+                this.doUpdate();
+            })
+            .catch(err => {
+                console.err("保存信息出错" + err);
+                Taro.atMessage({
+                    message: JSON.stringify(err),
+                    type: "error"
+                });
+            });
+    };
     openScan = () => {
+        var that = this;
         Taro.scanCode({
             onlyFromCamera: true,
             success: res => {
                 //{result: "http://v.youku.com/v_show/id_XNzU2MTgzNzEy.html", charSet: "UTF-8", errMsg: "scanCode:ok",
                 // scanType: "QR_CODE", rawData: "aHR0cDovL3YueW91a3UuY29tL3Zfc2hvdy9pZF9YTnpVMk1UZ3pOekV5Lmh0bWw="}
                 if (res && res.result) {
-                    this.setState({
-                        canNext: true,
-                        checkWord: "扫描成功."
-                    });
-                    Taro.atMessage({
-                        message: "扫码成功",
-                        type: "info"
-                    });
-                    var startDate = new Date();
-                    const query = Bmob.Query("ParkStation");
-                    query.set("cardId", Taro.getStorageSync("cardId"));
-                    query.set("protectState", true);
-                    query.set("payState", false);
-                    query.set("startDate", startDate);
-                    query
-                        .save()
-                        .then(res => {
-                            this.updateStations();
-                            Taro.atMessage({
-                                message: "已成功计费,保护锁已开。",
-                                type: "success"
-                            });
-                        })
-                        .catch(err => {
-                            Taro.atMessage({
-                                message: err,
-                                type: "success"
-                            });
-                        });
+                    that.test();
                 }
             }
         });
-    };
-
-    updateStations = () => {
-        const query = Bmob.Query("Stations");
-        query
-            .get("objectId")
-            .then(res => {
-                console.log(res);
-                res.set("parkNumber", "199"); //此处应该直接递减
-                res.save();
-            })
-            .catch(err => {
-                console.log(err);
-            });
     };
 
     goNext = () => {
@@ -103,31 +94,50 @@ export default class StepInTwo extends Component {
             url: "/pages/stepInThree/StepInThree"
         });
     };
-
+    doUpdate = () => {
+        console.log("更新方法不执行吗?");
+        const query1 = Bmob.Query("Stations");
+        query1
+            .get(Taro.getStorageSync("stationId"))
+            .then(res => {
+                console.log(res);
+                let curNumber = res.stationNumber - 1;
+                console.log("当前设置的数据是===>" + curNumber);
+                res.set("stationNumber", curNumber); //此处应该直接递减
+                res.save();
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        Taro.atMessage({
+            message: "已成功计费,防盗保护已开。",
+            type: "success"
+        });
+    };
     render() {
         return (
             <View>
                 <AtMessage />
-                <View className='container'>
+                <View className="container">
                     <Text>二维码已生成,请扫描二维码</Text>
-                    <Text style='color:gray;font-size:12px'>
+                    <Text style="color:gray;font-size:12px">
                         测试时,请找任意一张二维码扫描
                     </Text>
-                    <Image className='img-style' src={tingchezhuangImage} />
+                    <Image className="img-style" src={tingchezhuangImage} />
                     <Text>扫码结果: {this.state.checkWord}</Text>
                 </View>
 
                 <AtButton
-                    type='primary'
-                    className='btn'
+                    type="primary"
+                    className="btn"
                     onClick={this.openScan}
                 >
                     扫描二维码
                 </AtButton>
                 {this.state.canNext && (
                     <AtButton
-                        type='primary'
-                        className='btn'
+                        type="primary"
+                        className="btn"
                         onClick={this.goNext}
                     >
                         下一步
