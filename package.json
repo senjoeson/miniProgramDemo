@@ -1,8 +1,8 @@
 {
-    "name": "minipro_v1",
+    "name": "parking-system",
     "version": "1.0.0",
     "private": true,
-    "description": "小程序模板",
+    "description": "小程序",
     "templateInfo": {
         "name": "redux",
         "typescript": false,

@@ -1,8 +1,8 @@
 {
     "miniprogramRoot": "dist/",
-    "projectname": "小程序模板",
+    "projectname": "停车位管理系统",
     "description": "小程序",
-    "appid": "",
+    "appid": "wx2caccc57fff9139d",
     "setting": {
         "urlCheck": true,
         "es6": false,
@@ -21,6 +21,48 @@
                     "id": 0,
                     "name": "首页",
                     "pathName": "pages/home/Home",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 1,
+                    "name": "停车步骤",
+                    "pathName": "pages/parkStep/ParkStep",
+                    "query": "objectId=5358fd3bd9&&carNumber=粤A42123",
+                    "scene": null
+                },
+                {
+                    "id": 2,
+                    "name": "停车步骤一",
+                    "pathName": "pages/stepInOne/StepInOne",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 3,
+                    "name": "停车步骤二",
+                    "pathName": "pages/stepInTwo/StepInTwo",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 4,
+                    "name": "出车一",
+                    "pathName": "pages/stepOutOne/StepOutOne",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 5,
+                    "name": "出车2",
+                    "pathName": "pages/stepOutTwo/StepOutTwo",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 6,
+                    "name": "出车3",
+                    "pathName": "pages/stepOutThree/StepOutThree",
                     "query": "",
                     "scene": null
                 }
