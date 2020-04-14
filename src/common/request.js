@@ -27,18 +27,30 @@ const codeMessage = {
     500: "服务器发生错误，请检查服务器。",
     502: "网关错误。",
     503: "服务不可用，服务器暂时过载或维护。",
-    504: "网关超时。"
+    504: "网关超时。",
 };
-
+/**
+ * 可以配置公共参数数据
+ * @param {*} pararms
+ */
 function initParams(pararms) {
     return { ...pararms };
 }
 
 /**
- * 验证交易码
+ * 验证交易码  可以配置全局错误信息执行操作.
  */
-const checkCode = response => {
+const checkCode = (response) => {
     //后期会做一个统一的认证  针对不同交易码.会有不同的处理结果,如 错误页面  网络错误页面 或者成功页面等
+    // if (isCheckCode && response.data.respCode != "000000") {
+    //     Taro.showToast({
+    //         title: response.data.respMsg,
+    //         icon: "none",
+    //         duration: 2000
+    //     });
+    //     return [response.data, null];
+    // }
+    // return [null, response.data];
     return response;
 };
 
@@ -46,7 +58,7 @@ const checkCode = response => {
  * 验证响应状态码
  * @param {*} response
  */
-const checkStatus = response => {
+const checkStatus = (response) => {
     if (response.statusCode >= 200 && response.statusCode < 300) {
         return [null, response.data];
     }
@@ -65,14 +77,14 @@ const checkStatus = response => {
 /**
  * 请求异常
  */
-const catchError = error => {
+const catchError = (error) => {
     console.log(error);
-    
+
     if (error) {
         Taro.showToast({
             title: error.toString(),
             icon: "none",
-            duration: 2000
+            duration: 2000,
         });
     }
 };
@@ -81,18 +93,18 @@ export default function request(url, pararms, opt) {
     const _params = initParams(pararms);
     Taro.showToast({
         icon: "loading",
-        duration: 0
+        duration: 0,
     });
     return Taro.request({
         url: url,
         data: _params,
         method: "POST",
         header: {
-            "content-type": "application/json"
+            "content-type": "application/json",
         },
-        ...opt
+        ...opt,
     })
-        .then(response => {
+        .then((response) => {
             Taro.hideToast();
             return response;
         })
@@ -100,3 +112,40 @@ export default function request(url, pararms, opt) {
         .then(checkCode)
         .catch(catchError);
 }
+
+// export default function request(url, pararms, opt = {}) {
+//     const _url = url.indexOf("http") > -1 ? url : process.env.BASE_URL + url;
+//     console.log("realURL: " + _url);
+//     const _params = initParams(pararms);
+//     const { loading, isCatchError, isCheckCode } = {
+//         loading: true,
+//         isCatchError: true,
+//         isCheckCode: true,
+//         ...opt
+//     };
+//     loading &&
+//         Taro.showToast({
+//             icon: "loading",
+//             duration: 60000,
+//             mask: true
+//         });
+//     const send = Taro.request({
+//         url: _url,
+//         data: _params,
+//         method: "POST",
+//         header: {
+//             "content-type": "application/json"
+//         },
+//         ...opt
+//     })
+//         .then(response => {
+//             loading && Taro.hideToast();
+//             return response;
+//         })
+//         .then(checkStatus)
+//         .then(response => checkCode(response, isCheckCode));
+//     if (isCatchError) {
+//         return send.catch(catchError);
+//     }
+//     return send;
+// }

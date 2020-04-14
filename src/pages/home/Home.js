@@ -14,12 +14,12 @@ const Bmob = require("../../common/Bmob-2.2.1.min.js");
 
 @connect(({ home, loading }) => ({
     ...home,
-    loading: loading.effects["home/effectsDemo"]
+    loading: loading.effects["home/effectsDemo"],
 }))
 export default class Home extends Component {
     static propTypes = {
         dispatch: PropTypes.any,
-        msg: PropTypes.string
+        msg: PropTypes.string,
     };
 
     constructor(props) {
@@ -27,14 +27,14 @@ export default class Home extends Component {
         this.state = {
             parkNumber: 0,
             stationName: "",
-            enable: false
+            enable: false,
         };
     }
 
     static defaultProps = {};
 
     config = {
-        navigationBarTitleText: "首页"
+        navigationBarTitleText: "首页",
     };
 
     componentDidMount = () => {
@@ -44,14 +44,14 @@ export default class Home extends Component {
         //     payload: { msg: "trigger effectsDemo" }
         // });
         const query = Bmob.Query("Stations");
-        query.find().then(res => {
+        query.find().then((res) => {
             console.log(JSON.stringify(res));
             //[{"createdAt":"2019-11-20 11:08:29","enable":true,"objectId":"eKdvLLLa",
             //"stationName":"测试停车场","stationNumber":200,"updatedAt":"2019-11-20 11:16:24"}]
             this.setState({
                 parkNumber: res[0].stationNumber,
                 stationName: res[0].stationName,
-                enable: res[0].enable
+                enable: res[0].enable,
             });
             Taro.setStorageSync("stationId", res[0].objectId);
             // console.log(JSON.stringify(res));
@@ -65,19 +65,19 @@ export default class Home extends Component {
             Taro.showModal({
                 title: "提示",
                 content: "当前停车位不可用或数量不足,无法停车",
-                success: res => {
+                success: (res) => {
                     if (res.confirm) {
                         console.log("用户点击确定");
                     } else if (res.cancel) {
                         console.log("用户点击取消");
                     }
-                }
+                },
             });
         } else {
             Taro.showLoading({
                 title: "获取车辆信息中...",
                 mask: true,
-                success: res => {
+                success: (res) => {
                     setTimeout(() => {
                         Taro.hideLoading();
                         this.saveCarInfo();
@@ -85,7 +85,7 @@ export default class Home extends Component {
                     //保存成功
 
                     console.log("车辆信息已经获取");
-                }
+                },
             });
         }
     };
@@ -93,7 +93,7 @@ export default class Home extends Component {
     //解锁停车
     unlockPark = () => {
         Taro.navigateTo({
-            url: "/pages/stepOutOne/StepOutOne"
+            url: "/pages/stepOutOne/StepOutOne",
         });
     };
 
@@ -104,33 +104,26 @@ export default class Home extends Component {
         query.set("carColor", "白色");
         query
             .save()
-            .then(res => {
+            .then((res) => {
                 Taro.showToast({
                     title: "保存车辆信息成功!",
                     icon: "success",
-                    duration: 2000
+                    duration: 2000,
                 });
                 Taro.setStorageSync("cardId", res.objectId);
                 Taro.navigateTo({
                     // url: `/pages/parkStep/ParkStep?objectId=${res.objectId}`
-                    url: `/pages/stepInOne/StepInOne`
+                    url: `/pages/stepInOne/StepInOne`,
                 });
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
             });
     };
     render() {
         return (
             <View className="home-style">
-                <Text>当前停车场: {this.state.stationName}</Text>
-                <Text>当前的停车位: {this.state.parkNumber} 位</Text>
-                <AtButton className="btn-style" onClick={this.startPark}>
-                    停车流程
-                </AtButton>
-                <AtButton className="btn-style" onClick={this.unlockPark}>
-                    出车流程
-                </AtButton>
+                <Text>welcome!</Text>
             </View>
         );
     }

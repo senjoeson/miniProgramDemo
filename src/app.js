@@ -13,7 +13,7 @@ const Bmob = require("./common/Bmob-2.2.1.min.js");
 
 const dvaApp = dva.createApp({
     initialState: {},
-    models: models
+    models: models,
 });
 
 const store = dvaApp.getStore();
@@ -22,22 +22,13 @@ const store = dvaApp.getStore();
 
 class App extends Component {
     config = {
-        pages: [
-            "pages/home/Home",
-            // "pages/parkStep/ParkStep",
-            "pages/stepInOne/StepInOne",
-            "pages/stepInTwo/StepInTwo",
-            "pages/stepInThree/StepInThree",
-            "pages/stepOutOne/StepOutOne",
-            "pages/stepOutTwo/StepOutTwo",
-            "pages/stepOutThree/StepOutThree"
-        ],
+        pages: ["pages/home/Home"],
         window: {
             backgroundTextStyle: "light",
             navigationBarBackgroundColor: "#fff",
             navigationBarTitleText: "WeChat",
-            navigationBarTextStyle: "black"
-        }
+            navigationBarTextStyle: "black",
+        },
     };
 
     componentDidMount() {}
@@ -60,5 +51,5 @@ class App extends Component {
     }
 }
 
-Bmob.initialize("8844924ffd68dbe5", "960616");
+Bmob.initialize("", "");
 Taro.render(<App />, document.getElementById("app"));
